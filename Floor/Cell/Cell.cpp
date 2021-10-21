@@ -55,8 +55,7 @@ Cell &Cell::operator=(const Cell &other) {
     if(!this->_sprite){
         delete this->_sprite;
     }
-    _sprite = new sf::Sprite(*_texture);
-    _sprite->setPosition(WIDTH*_position.x, WIDTH*_position.y);
+    *(this->_sprite) = *(other._sprite);
 
     this->_type = other._type;
     this->_position = other._position;

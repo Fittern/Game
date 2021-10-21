@@ -22,6 +22,7 @@ Floor& Floor::operator=(const Floor& other) {
     for (int i = 0; i < height; i++) cells[i] = new Cell*[width];
     for(int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
+            // TODO: разобраться с копированием cell
             *(cells[i][j]) = *(other.cells[i][j]);
         }
     }

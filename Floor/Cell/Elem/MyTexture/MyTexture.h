@@ -23,7 +23,7 @@ public:
 
     sf::Texture *getTextureOfCellExit() const;
 
-    void setTextureOfCellExit(const std::string& filename;
+    void setTextureOfCellExit(const std::string& filename);
 
     sf::Texture *getTextureOfCellEntry() const;
 
