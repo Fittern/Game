@@ -75,7 +75,7 @@ Floor::~Floor() {
     delete cells;
 }
 
-void Floor::setAllCell(sf::Texture texture) {
+void Floor::setAllCell(sf::Texture* texture) {
     for (int i = 0; i < height; ++i) {
         for (int j = 0; j < width; ++j) {
             cells[i][j] = new Cell(texture, sf::Vector2i(i, j), nullptr, Type::NORMAL);

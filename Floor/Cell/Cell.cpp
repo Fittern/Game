@@ -1,13 +1,14 @@
 #include "Cell.h"
 
-Cell::Cell(sf::Texture texture, sf::Vector2i position, Elem* elem, Type type): _position(position), _elem(elem), _type(type){
-    _texture = texture;
-    _sprite = new sf::Sprite(texture);
+Cell::Cell(sf::Texture* texture, sf::Vector2i position, Elem* elem, Type type): _position(position), _elem(elem), _type(type){
+    _texture = new sf::Texture;
+    *(_texture) = *(texture);
+    _sprite = new sf::Sprite(*texture);
     _sprite->setPosition(WIDTH*position.x, WIDTH*position.y);
 }
 
-void Cell::setSprite(sf::Texture texture){
-    _sprite = new sf::Sprite(texture);
+void Cell::setSprite(sf::Texture* texture){
+    _sprite = new sf::Sprite(*texture);
     _sprite->setPosition(WIDTH*_position.x, WIDTH*_position.y);
 };
 
@@ -48,8 +49,9 @@ Cell &Cell::operator=(const Cell &other) {
     //    this->_sprite = new sf::Sprite;
     //}
     this->_position = other._position;
-    this->_texture = other._texture;
-    this->_sprite = new sf::Sprite(other._texture);
+    this->_texture = new sf::Texture;
+    *(this->_texture) = *(other._texture);
+    this->_sprite = new sf::Sprite(*other._texture);
     this->_sprite->setPosition(WIDTH* this->_position.x, WIDTH* this->_position.y);
     //*(this->_sprite) = *(other._sprite);
 
@@ -85,6 +87,6 @@ const sf::Vector2i &Cell::getPosition() const {
     return _position;
 }
 
-sf::Texture Cell::getTexture() const {
+sf::Texture* Cell::getTexture() const {
     return _texture;
 }
