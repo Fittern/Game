@@ -6,6 +6,7 @@
 #include "stdlib.h"
 #include <SFML/Graphics.hpp>
 #include "Elem/Elem.h"
+#include "Elem/MyTexture/MyTexture.h"
 
 
 enum class Type : unsigned short {
@@ -25,14 +26,18 @@ private:
     sf::Texture* _texture;
 
 public:
-    Cell(const std::string& filename, sf::Vector2i position, Elem* elem , Type type);
+    Cell(sf::Texture* texture, sf::Vector2i position, Elem* elem , Type type);
+    //Cell(sf::Sprite sprite, sf::Vector2i position, Elem* elem , Type type);
     Cell(const Cell&) = default;
     Cell(Cell&&) = default;
     Cell& operator=(const Cell& other);
     Cell& operator=(Cell&& other);
     ~Cell();
 
-    void setTexture(const std::string& filename);
+    sf::Texture *getTexture() const;
+
+    const sf::Vector2i &getPosition() const;
+    void setSprite(sf::Texture* texture);
     sf::Sprite* getSprite();
     void setElem(Elem* elem);
     Elem* getElem();

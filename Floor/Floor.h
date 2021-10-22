@@ -5,8 +5,6 @@
 #define WIDTH_OF_FLOOR 15
 #define MIN_SIZE_OF_FLOOR 9
 
-#define NORMAL_TEXTURE_PATH "../Game_Obj/Normal.jpg"
-
 #include "Cell/Cell.h"
 
 class Floor {
@@ -22,7 +20,7 @@ public:
     Floor& operator=(const Floor& other);
     Floor& operator=(Floor&& other);
     void Draw_Floor(sf::RenderWindow* window);
-    void Reset();
+    void setAllCell(sf::Texture* texture);
     ~Floor();
 };
 

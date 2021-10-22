@@ -18,19 +18,12 @@ private:
 
 public:
     sf::Texture *getTextureOfCellNormal() const;
-
     void setTextureOfCellNormal(const std::string& filename);
-
     sf::Texture *getTextureOfCellExit() const;
-
     void setTextureOfCellExit(const std::string& filename);
-
     sf::Texture *getTextureOfCellEntry() const;
-
     void setTextureOfCellEntry(const std::string& filename);
-
     sf::Texture *getTextureOfCellWall() const;
-
     void setTextureOfCellWall(const std::string& filename);
 };
 
