@@ -17,14 +17,14 @@ Floor::Floor(const Floor& other){
 
 Floor& Floor::operator=(const Floor& other) {
     this->height = other.height;
-    width = other.width;
+    this->width = other.width;
     cells = new Cell**[height];
     exit = other.exit;
     entry = other.entry;
     for (int i = 0; i < height; i++) cells[i] = new Cell*[width];
     for (int i = 0; i < height; ++i) for (int j = 0; j < width; ++j){
-        Cell cell(other.cells[i][j]->getTexture(), other.cells[i][j]->getPosition(), other.cells[i][j]->getElem(), other.cells[i][j]->getType());
-        cells[i][j] = &cell;
+        cells[i][j] = new Cell(other.cells[i][j]->getTexture(), other.cells[i][j]->getPosition(), other.cells[i][j]->getElem(), other.cells[i][j]->getType());
+        //cells[i][j] = &cell;
     }
     /*for(int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
@@ -75,7 +75,7 @@ Floor::~Floor() {
     delete cells;
 }
 
-void Floor::setAllCell(sf::Texture *texture) {
+void Floor::setAllCell(sf::Texture texture) {
     for (int i = 0; i < height; ++i) {
         for (int j = 0; j < width; ++j) {
             cells[i][j] = new Cell(texture, sf::Vector2i(i, j), nullptr, Type::NORMAL);

@@ -23,10 +23,10 @@ private:
     Type _type;
     sf::Vector2i _position;
     sf::Sprite* _sprite;
-    sf::Texture* _texture;
+    sf::Texture _texture;
 
 public:
-    Cell(sf::Texture* texture, sf::Vector2i position, Elem* elem , Type type);
+    Cell(sf::Texture texture, sf::Vector2i position, Elem* elem , Type type);
     //Cell(sf::Sprite sprite, sf::Vector2i position, Elem* elem , Type type);
     Cell(const Cell&) = default;
     Cell(Cell&&) = default;
@@ -34,10 +34,10 @@ public:
     Cell& operator=(Cell&& other);
     ~Cell();
 
-    sf::Texture *getTexture() const;
+    sf::Texture getTexture() const;
 
     const sf::Vector2i &getPosition() const;
-    void setSprite(sf::Texture* texture);
+    void setSprite(sf::Texture texture);
     sf::Sprite* getSprite();
     void setElem(Elem* elem);
     Elem* getElem();

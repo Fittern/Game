@@ -20,7 +20,7 @@ public:
     Floor& operator=(const Floor& other);
     Floor& operator=(Floor&& other);
     void Draw_Floor(sf::RenderWindow* window);
-    void setAllCell(sf::Texture* texture);
+    void setAllCell(sf::Texture texture);
     ~Floor();
 };
 
