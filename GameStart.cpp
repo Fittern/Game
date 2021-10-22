@@ -14,9 +14,9 @@ void GameStart::StartGame() {
     auto director = FloorDirector(builder);
     director.Builder_FloorBuilderTree();
     Floor* floor = builder->getFloor();
-    Floor *floor1 = new Floor(HEIGTH_OF_FLOOR, WIDTH_OF_FLOOR);
+    Floor* floor1 = new Floor(HEIGTH_OF_FLOOR, WIDTH_OF_FLOOR);
     *floor1 = *floor;
-    //floor->setAllCell(game_texture.getTextureOfCellWall());
+    floor->setAllCell(game_texture.getTextureOfCellWall());
     while (window2.isOpen() || window.isOpen()) {
         sf::Event event, event1;
         while (window.pollEvent(event)) {

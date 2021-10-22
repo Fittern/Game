@@ -65,6 +65,7 @@ Floor& Floor::operator=(Floor&& other){
 void Floor::Draw_Floor(sf::RenderWindow* window) {
     for (int i = 0; i < height; ++i) {
         for (int j = 0; j < width; ++j) {
+            //cells[i][j]->setSprite(cells[i][j]->getTexture());
             window->draw(*this->cells[i][j]->getSprite());
         }
     }

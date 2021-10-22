@@ -3,7 +3,7 @@
 
 #define HEIGTH_OF_FLOOR 25
 #define WIDTH_OF_FLOOR 15
-#define MIN_SIZE_OF_FLOOR 9
+#define MIN_SIZE_OF_FLOOR 3
 
 #include "Cell/Cell.h"
 

@@ -8,6 +8,8 @@ Cell::Cell(sf::Texture* texture, sf::Vector2i position, Elem* elem, Type type): 
 }
 
 void Cell::setSprite(sf::Texture* texture){
+    _texture = new sf::Texture;
+    _texture = texture;
     _sprite = new sf::Sprite(*texture);
     _sprite->setPosition(WIDTH*_position.x, WIDTH*_position.y);
 };
