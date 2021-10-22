@@ -50,7 +50,7 @@ Cell &Cell::operator=(const Cell &other) {
     this->_position = other._position;
     this->_texture = other._texture;
     this->_sprite = new sf::Sprite(other._texture);
-    this->_sprite->setPosition(WIDTH*_position.x, WIDTH*_position.y);
+    this->_sprite->setPosition(WIDTH* this->_position.x, WIDTH* this->_position.y);
     //*(this->_sprite) = *(other._sprite);
 
     this->_type = other._type;

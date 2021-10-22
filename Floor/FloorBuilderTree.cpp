@@ -117,7 +117,7 @@ void FloorBuilderTree::Reset(){
 
 Floor* FloorBuilderTree::getFloor(){
     Floor* result;
-    *(result) = *(this->floor);
+    result = this->floor;
     this->Reset();
     return result;
 }
