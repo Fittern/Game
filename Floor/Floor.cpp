@@ -8,10 +8,12 @@ Floor::Floor(int height, int width): height(height), width(width) {
 Floor::Floor(const Floor& other){
     this->height = other.height;
     this->width = other.width;
-    for(int i = 0; i < this->height; i++) {
-        for (int j = 0; j < this->width; j++) {
-            *(this->cells[i][j]) = *(other.cells[i][j]);
-        }
+    cells = new Cell**[height];
+    exit = other.exit;
+    entry = other.entry;
+    for (int i = 0; i < height; i++) cells[i] = new Cell*[width];
+    for (int i = 0; i < height; ++i) for (int j = 0; j < width; ++j){
+            cells[i][j] = new Cell(other.cells[i][j]->getTexture(), other.cells[i][j]->getPosition(), other.cells[i][j]->getElem(), other.cells[i][j]->getType());
     }
 }
 
@@ -24,14 +26,7 @@ Floor& Floor::operator=(const Floor& other) {
     for (int i = 0; i < height; i++) cells[i] = new Cell*[width];
     for (int i = 0; i < height; ++i) for (int j = 0; j < width; ++j){
         cells[i][j] = new Cell(other.cells[i][j]->getTexture(), other.cells[i][j]->getPosition(), other.cells[i][j]->getElem(), other.cells[i][j]->getType());
-        //cells[i][j] = &cell;
     }
-    /*for(int i = 0; i < height; i++) {
-        for (int j = 0; j < width; j++) {
-            // TODO: разобраться с копированием cell
-            *(cells[i][j]) = *(other.cells[i][j]);
-        }
-    }*/
     return *this;
 }
 
@@ -40,11 +35,15 @@ Floor::Floor(Floor &&other) {
     other.height = 0;
     this->width = other.width;
     other.width = 0;
-    for(int i = 0; i < this->height; i++) {
-        for (int j = 0; j < this->width; j++) {
-            *(this->cells[i][j]) = *(other.cells[i][j]);
+    cells = new Cell**[height];
+    exit = other.exit;
+    other.exit = sf::Vector2i(0,0);
+    entry = other.entry;
+    other.entry = sf::Vector2i(0,0);
+    for (int i = 0; i < height; i++) cells[i] = new Cell*[width];
+    for (int i = 0; i < height; ++i) for (int j = 0; j < width; ++j){
+            cells[i][j] = new Cell(other.cells[i][j]->getTexture(), other.cells[i][j]->getPosition(), other.cells[i][j]->getElem(), other.cells[i][j]->getType());
             delete other.cells[i][j];
-        }
     }
 }
 
@@ -53,11 +52,15 @@ Floor& Floor::operator=(Floor&& other){
     other.height = 0;
     this->width = other.width;
     other.width = 0;
-    for(int i = 0; i < this->height; i++) {
-        for (int j = 0; j < this->width; j++) {
-            *(this->cells[i][j]) = *(other.cells[i][j]);
+    cells = new Cell**[height];
+    exit = other.exit;
+    other.exit = sf::Vector2i(0,0);
+    entry = other.entry;
+    other.entry = sf::Vector2i(0,0);
+    for (int i = 0; i < height; i++) cells[i] = new Cell*[width];
+    for (int i = 0; i < height; ++i) for (int j = 0; j < width; ++j){
+            cells[i][j] = new Cell(other.cells[i][j]->getTexture(), other.cells[i][j]->getPosition(), other.cells[i][j]->getElem(), other.cells[i][j]->getType());
             delete other.cells[i][j];
-        }
     }
     return *this;
 };
