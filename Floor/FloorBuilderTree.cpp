@@ -1,6 +1,6 @@
 #include "FloorBuilderTree.h"
 
-FloorBuilderTree::FloorBuilderTree(){
+FloorBuilderTree::FloorBuilderTree(MyTexture texture): now_texture(texture){
     this->floor = new Floor(HEIGTH_OF_FLOOR, WIDTH_OF_FLOOR);
     // TODO: сделать считывание ширины поля
 };
@@ -12,7 +12,7 @@ FloorBuilderTree::~FloorBuilderTree(){
 void FloorBuilderTree::GeneratNormalCells(){
     for (int i = 0; i < this->floor->height; ++i) {
         for (int j = 0; j < this->floor->width; ++j) {
-            this->floor->cells[i][j] = new Cell(NORMAL_TEXTURE_PATH, sf::Vector2i(i, j), nullptr, Type::NORMAL);
+            this->floor->cells[i][j] = new Cell(now_texture.getTextureOfCellNormal(), sf::Vector2i(i, j), nullptr, Type::NORMAL);
         // TODO: nullptr в поле elem заменить на нормальное(пустое проходимое)
         }
     }
@@ -25,7 +25,7 @@ void FloorBuilderTree::GeneratWallCells(){
                 this->floor->cells[i][j]->setElem(nullptr);
                 // TODO: nullptr в поле elem заменить на не проходимое
                 this->floor->cells[i][j]->setType(Type::WALL);
-                this->floor->cells[i][j]->setTexture(WALL_TEXTURE_PATH);
+                this->floor->cells[i][j]->setSprite(now_texture.getTextureOfCellWall());
             }
         }
     }
@@ -65,7 +65,7 @@ void FloorBuilderTree::GeneratWallDungeonCells(int x1, int y1, int x2, int y2, i
                         this->floor->cells[i][wall_index]->setElem(nullptr);
                         // TODO: nullptr в поле elem заменить на не проходимое
                         this->floor->cells[i][wall_index]->setType(Type::WALL);
-                        this->floor->cells[i][wall_index]->setTexture(WALL_TEXTURE_PATH);
+                        this->floor->cells[i][wall_index]->setSprite(now_texture.getTextureOfCellWall());
                     }
                 }
                 this->GeneratWallDungeonCells(wall_index, y1, x2, y2, mass);
@@ -91,7 +91,7 @@ void FloorBuilderTree::GeneratWallDungeonCells(int x1, int y1, int x2, int y2, i
                         this->floor->cells[wall_index][i]->setElem(nullptr);
                         // TODO: nullptr в поле elem заменить на не проходимое
                         this->floor->cells[wall_index][i]->setType(Type::WALL);
-                        this->floor->cells[wall_index][i]->setTexture(WALL_TEXTURE_PATH);
+                        this->floor->cells[wall_index][i]->setSprite(now_texture.getTextureOfCellWall());
                     }
                 }
                 this->GeneratWallDungeonCells(x1, wall_index, x2, y2, mass);
@@ -103,12 +103,12 @@ void FloorBuilderTree::GeneratWallDungeonCells(int x1, int y1, int x2, int y2, i
 
 void FloorBuilderTree::GeneratEntryCell(){
     this->floor->cells[1][1]->setType(Type::ENTRY);
-    this->floor->cells[1][1]->setTexture(ENTRY_TEXTURE_PATH);
+    this->floor->cells[1][1]->setSprite(now_texture.getTextureOfCellEntry());
 };
 
 void FloorBuilderTree::GeneratExitCell(){
     this->floor->cells[this->floor->height - 2][this->floor->width - 2]->setType(Type::EXIT);
-    this->floor->cells[this->floor->height - 2][this->floor->width - 2]->setTexture(EXIT_TEXTURE_PATH);
+    this->floor->cells[this->floor->height - 2][this->floor->width - 2]->setSprite(now_texture.getTextureOfCellExit());
 };
 
 void FloorBuilderTree::Reset(){
@@ -116,7 +116,16 @@ void FloorBuilderTree::Reset(){
 };
 
 Floor* FloorBuilderTree::getFloor(){
-    Floor* result = this->floor;
+    Floor* result;
+    result = this->floor;
     this->Reset();
     return result;
-};
+}
+
+/*void FloorBuilderTree::setNowTexture() {
+    now_texture.setTextureOfCellEntry(ENTRY_TEXTURE_PATH);
+    now_texture.setTextureOfCellExit(EXIT_TEXTURE_PATH);
+    now_texture.setTextureOfCellNormal(NORMAL_TEXTURE_PATH);
+    now_texture.setTextureOfCellWall(WALL_TEXTURE_PATH);
+
+}*/;

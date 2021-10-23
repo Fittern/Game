@@ -19,7 +19,7 @@ public:
     Elem(Elem&&) = default;
     virtual Elem& operator=(const Elem& other) = 0;
     virtual Elem& operator=(Elem&& other) = 0;
-    virtual void setTexture(const std::string& filename) = 0;
+    virtual void setTexture(sf::Texture* texture) = 0;
     virtual sf::Sprite* getSprite() = 0;
     virtual Type_of_elem getType() = 0;
     virtual float getDamage() = 0;

@@ -1,16 +1,16 @@
 #include "Cell.h"
 
-Cell::Cell(const std::string& filename, sf::Vector2i position, Elem* elem, Type type): _position(position), _elem(elem), _type(type){
+Cell::Cell(sf::Texture* texture, sf::Vector2i position, Elem* elem, Type type): _position(position), _elem(elem), _type(type){
     _texture = new sf::Texture;
-    _texture->loadFromFile(filename);
-    _sprite = new sf::Sprite(*_texture);
+    *(_texture) = *(texture);
+    _sprite = new sf::Sprite(*texture);
     _sprite->setPosition(WIDTH*position.x, WIDTH*position.y);
 }
 
-void Cell::setTexture(const std::string& filename){
+void Cell::setSprite(sf::Texture* texture){
     _texture = new sf::Texture;
-    _texture->loadFromFile(filename);
-    _sprite = new sf::Sprite(*_texture);
+    _texture = texture;
+    _sprite = new sf::Sprite(*texture);
     _sprite->setPosition(WIDTH*_position.x, WIDTH*_position.y);
 };
 
@@ -19,8 +19,7 @@ sf::Sprite* Cell::getSprite(){
 };
 
 Cell::~Cell() {
-    delete _texture;
-    delete _sprite;
+    //delete _sprite;
 }
 
 void Cell::setElem(Elem* elem){
@@ -47,30 +46,24 @@ Cell &Cell::operator=(const Cell &other) {
     // TODO: копирование элемента клетки
      */
 
-    if(this->_texture){
-        this->_texture = new sf::Texture;
-    }
+    //this = Cell(*(other._sprite), other._position, nullptr, other._type);
+    //if(this->_sprite){
+    //    this->_sprite = new sf::Sprite;
+    //}
+    this->_position = other._position;
+    this->_texture = new sf::Texture;
     *(this->_texture) = *(other._texture);
-
-    if(!this->_sprite){
-        delete this->_sprite;
-    }
-    _sprite = new sf::Sprite(*_texture);
-    _sprite->setPosition(WIDTH*_position.x, WIDTH*_position.y);
+    this->_sprite = new sf::Sprite(*other._texture);
+    this->_sprite->setPosition(WIDTH* this->_position.x, WIDTH* this->_position.y);
+    //*(this->_sprite) = *(other._sprite);
 
     this->_type = other._type;
-    this->_position = other._position;
     return *this;
 }
 
 Cell &Cell::operator=(Cell &&other) {
 
     //*(this->_elem) = *((Elem*)other._elem);
-    if(this->_texture){
-        this->_texture = new sf::Texture;
-    }
-    *(this->_texture) = *(other._texture);
-    delete other._texture;
 
     if(this->_sprite){
         this->_sprite = new sf::Sprite;
@@ -86,4 +79,16 @@ Cell &Cell::operator=(Cell &&other) {
 std::ostream &operator<<(std::ostream &os, const Cell &cell) {
     os << "_type: " << (int)cell._type;
     return os;
-};
+}
+
+/*Cell::Cell(sf::Sprite sprite, sf::Vector2i position, Elem *elem, Type type): _position(position), _elem(elem), _type(type){
+    _sprite = &sprite;
+}*/
+
+const sf::Vector2i &Cell::getPosition() const {
+    return _position;
+}
+
+sf::Texture* Cell::getTexture() const {
+    return _texture;
+}
