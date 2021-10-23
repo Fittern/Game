@@ -1,8 +1,10 @@
 #ifndef GAME_GAMESTART_H
 #define GAME_GAMESTART_H
 
-#include "Floor/FloorDirector.h"
-#include "Floor/FloorBuilderTree.h"
+#include <ctime>
+
+#include "../Floor/FloorDirector.h"
+#include "../Floor/FloorBuilderTree.h"
 /*
 #define NORMAL_TEXTURE_PATH "../Game_Obj/Tiles/tile_0019.png"
 #define ENTRY_TEXTURE_PATH "../Game_Obj/Tiles/tile_0048.png"

@@ -1,6 +1,6 @@
 #include "Cell.h"
 
-Cell::Cell(sf::Texture* texture, sf::Vector2i position, Elem* elem, Type type): _position(position), _elem(elem), _type(type){
+Cell::Cell(sf::Texture* texture, sf::Vector2i position, IElem* elem, Type type): _position(position), _elem(elem), _type(type){
     _texture = new sf::Texture;
     *(_texture) = *(texture);
     _sprite = new sf::Sprite(*texture);
@@ -22,11 +22,11 @@ Cell::~Cell() {
     //delete _sprite;
 }
 
-void Cell::setElem(Elem* elem){
+void Cell::setElem(IElem* elem){
     _elem = elem;
 };
 
-Elem* Cell::getElem(){
+IElem* Cell::getElem(){
     return _elem;
 };
 
@@ -40,7 +40,7 @@ Type Cell::getType(){
 
 Cell &Cell::operator=(const Cell &other) {
     /*if(this->_elem){
-        this->_elem = new Elem;
+        this->_elem = new IElem;
     }
     *(this->_elem) = *(other._elem);
     // TODO: копирование элемента клетки
@@ -63,7 +63,7 @@ Cell &Cell::operator=(const Cell &other) {
 
 Cell &Cell::operator=(Cell &&other) {
 
-    //*(this->_elem) = *((Elem*)other._elem);
+    //*(this->_elem) = *((IElem*)other._elem);
 
     if(this->_sprite){
         this->_sprite = new sf::Sprite;
@@ -81,7 +81,7 @@ std::ostream &operator<<(std::ostream &os, const Cell &cell) {
     return os;
 }
 
-/*Cell::Cell(sf::Sprite sprite, sf::Vector2i position, Elem *elem, Type type): _position(position), _elem(elem), _type(type){
+/*Cell::Cell(sf::Sprite sprite, sf::Vector2i position, IElem *elem, Type type): _position(position), _elem(elem), _type(type){
     _sprite = &sprite;
 }*/
 

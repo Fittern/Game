@@ -1,6 +1,7 @@
 #include "GameStart.h"
 
 void GameStart::StartGame() {
+    srand(static_cast<unsigned int>(time(0)));//527, 55, 123
 
     MyTexture game_texture;
     game_texture.setTextureOfCellEntry(ENTRY_TEXTURE_PATH);
