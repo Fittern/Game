@@ -1,38 +1,72 @@
 #include "GameStart.h"
 
 void GameStart::StartGame() {
-    srand(static_cast<unsigned int>(time(0)));//527, 55, 123
+    unsigned int a = time(0);
+    srand(static_cast<unsigned int>(a));//527, 55, 123, 77, 1638560379
 
     MyTexture game_texture;
-    game_texture.setTextureOfCellEntry(ENTRY_TEXTURE_PATH);
-    game_texture.setTextureOfCellExit(EXIT_TEXTURE_PATH);
-    game_texture.setTextureOfCellNormal(NORMAL_TEXTURE_PATH);
-    game_texture.setTextureOfCellWall(WALL_TEXTURE_PATH);
-
-    sf::RenderWindow window(sf::VideoMode(HEIGTH_OF_FLOOR * WIDTH, WIDTH_OF_FLOOR * WIDTH), "OOP: Lab 1");
-    sf::RenderWindow window2(sf::VideoMode(HEIGTH_OF_FLOOR * WIDTH, WIDTH_OF_FLOOR * WIDTH), "OOP: Lab 1 w2");
+    //sf::RenderWindow window(sf::VideoMode(HEIGTH_OF_FLOOR * WIDTH, WIDTH_OF_FLOOR * WIDTH), "OOP: Lab 1");
+    //sf::RenderWindow window2(sf::VideoMode(HEIGTH_OF_FLOOR * WIDTH, WIDTH_OF_FLOOR * WIDTH), "OOP: Lab 1 w2");
     auto builder = new FloorBuilderTree(game_texture);
     auto director = FloorDirector(builder);
     director.Builder_FloorBuilderTree();
     Floor* floor = builder->getFloor();
-    Floor* floor1 = new Floor(HEIGTH_OF_FLOOR, WIDTH_OF_FLOOR);
-    *floor1 = *floor;
-    floor->setAllCell(game_texture.getTextureOfCellWall());
-    while (window2.isOpen() || window.isOpen()) {
-        sf::Event event, event1;
+    VecOfPerson per(*floor);
+    /*
+    //Floor* floor1 = new Floor(HEIGTH_OF_FLOOR, WIDTH_OF_FLOOR);
+    //*floor1 = *floor;
+    //floor->setAllCell(game_texture.getTextureOfCellWall());
+    while (/*window2.isOpen() || *//*window.isOpen()) {
+    /*    sf::Event event, event1;
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 window.close();
         }
         floor->Draw_Floor(&window);
         window.display();
-        while (window2.pollEvent(event1)) {
-            if (event1.type == sf::Event::Closed)
-                window2.close();
+        //while (window2.pollEvent(event1)) {
+        //    if (event1.type == sf::Event::Closed)
+        //        window2.close();
+        //}
+        //floor1->Draw_Floor(&window2);
+        //window2.display();
+    }*/
+
+    Actions actions(per, *floor);
+    Rendering rendering(*floor, game_texture, (Player*)per.persons[0]);
+    rendering.drawFloor();
+    //Floor* floor1 = new Floor(HEIGTH_OF_FLOOR, WIDTH_OF_FLOOR);
+    //*floor1 = *floor;
+    //floor->setAllCell(game_texture.getTextureOfCellWall());
+    PAction pressed = NOTHING;
+    while (pressed) {
+        pressed = rendering.winda();
+        if (pressed == LEFT) {
+            pressed = actions.move(PAction::LEFT);
+            rendering.drawFloor();
         }
-        floor1->Draw_Floor(&window2);
-        window2.display();
+        else if (pressed == RIGHT) {
+            pressed = actions.move(PAction::RIGHT);
+            rendering.drawFloor();
+        }
+        else if (pressed == UP) {
+            pressed = actions.move(PAction::UP);
+            rendering.drawFloor();
+        }
+        else if (pressed == DOWN) {
+            pressed = actions.move(PAction::DOWN);
+            rendering.drawFloor();
+        }
+        if (pressed == WIN){
+            printf("You have completed the map №%d in %d steps!!!", a, per.persons[0]->getStep()-20);
+            pressed = END;
+        }
+        if (pressed == DEAD){
+            printf("You died on the mapd №%d", a);
+            pressed = END;
+        }
     }
+
 
     /*while (window2.isOpen()){
         sf::Event event, event1;

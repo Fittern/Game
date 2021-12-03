@@ -4,7 +4,7 @@
 
 #include "Enemy.h"
 
-Enemy::Enemy(sf::Texture *Texture, sf::Vector2i Position): position(Position) {
+Enemy::Enemy(sf::Texture *Texture, Coords Position): position(Position) {
     texture = new sf::Texture;
     texture = Texture;
     sprite = new sf::Sprite(*texture);
@@ -33,7 +33,6 @@ int Enemy::getMove()  {
 }
 
 Enemy::~Enemy() {
-    delete texture;
     delete sprite;
 }
 
@@ -65,6 +64,22 @@ void Enemy::setItem(Type_of_item item) {
     else{
         mp += 300;
     }
+}
+
+Coords Enemy::getPosition() {
+    return position;
+}
+
+void Enemy::setPosition(Coords position) {
+    Enemy::position = position;
+}
+
+int Enemy::getHp() {
+    return hp;
+}
+
+int Enemy::getIp() {
+    return ip;
 }
 
 

@@ -4,7 +4,7 @@
 
 #include "MP.h"
 
-MP::MP(sf::Texture *Texture, sf::Vector2i Position): position(Position) {
+MP::MP(sf::Texture *Texture, Coords Position): position(Position) {
     texture = new sf::Texture;
     texture = Texture;
     sprite = new sf::Sprite(*texture);
@@ -20,5 +20,5 @@ Type_of_elem MP::getType() {
 }
 
 Type_of_item MP::getItem() {
-    return Type_of_item::ATC;
+    return Type_of_item::MP;
 }

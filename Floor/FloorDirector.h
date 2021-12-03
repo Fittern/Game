@@ -1,5 +1,4 @@
-#ifndef GAME_FLOORDIRECTOR_H
-#define GAME_FLOORDIRECTOR_H
+#pragma once
 
 #include "FloorBuilder.h"
 
@@ -15,6 +14,3 @@ public:
     void Builder_FloorBuilderTree();
 
 };
-
-
-#endif //GAME_FLOORDIRECTOR_H

@@ -1,25 +1,17 @@
-//
-// Created by denis on 23.10.2021.
-//
+#pragma once
 
-#ifndef GAME_MP_H
-#define GAME_MP_H
-
-#include "../IElem.h"
+#include "IItem.h"
 
 
-class MP {
+class MP: public IItem {
 public:
     Type_of_elem type;
     sf::Texture* texture;
     sf::Sprite* sprite;
-    sf::Vector2i position;
+    Coords position;
 
-    MP(sf::Texture* Texture, sf::Vector2i Position);
-    sf::Sprite* getSprite() ;
-    Type_of_elem getType();
-    Type_of_item getItem();
+    MP(sf::Texture* Texture, Coords Position);
+    sf::Sprite* getSprite() override;
+    Type_of_elem getType() override;
+    Type_of_item getItem() final;
 };
-
-
-#endif //GAME_MP_H

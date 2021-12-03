@@ -4,7 +4,7 @@
 
 #include "HP.h"
 
-HP::HP(sf::Texture *Texture, sf::Vector2i Position): position(Position) {
+HP::HP(sf::Texture *Texture, Coords Position): position(Position) {
     texture = new sf::Texture;
     texture = Texture;
     sprite = new sf::Sprite(*texture);

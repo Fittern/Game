@@ -1,16 +1,11 @@
-#ifndef GAME_FLOOR_H
-#define GAME_FLOOR_H
-
-#define HEIGTH_OF_FLOOR 25
-#define WIDTH_OF_FLOOR 15
-#define MIN_SIZE_OF_FLOOR 3
+#pragma once
 
 #include "Cell/Cell.h"
 
 class Floor {
 public:
     Cell*** cells;
-    sf::Vector2i entry, exit;
+    Coords entry, exit;
     int height, width;
 
 
@@ -23,6 +18,3 @@ public:
     void setAllCell(sf::Texture* texture);
     ~Floor();
 };
-
-
-#endif //GAME_FLOOR_H

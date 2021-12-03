@@ -4,7 +4,15 @@
 
 #include "Tank.h"
 
-Tank::Tank(sf::Texture *texture, sf::Vector2i position) : Enemy(texture, position) {}
+Tank::Tank(sf::Texture *texture, Coords position) : Enemy(texture, position) {
+    speed = 2;
+    atc_step = 1.5;
+    hp_step = 3;
+    mp_step = 0.5;
+    atc = step * atc_step;
+    mp = step * mp_step;
+    hp = step * hp_step;
+}
 
 int Tank::getMove() {
     hp += 2*mp_step;

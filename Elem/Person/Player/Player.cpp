@@ -4,7 +4,7 @@
 
 #include "Player.h"
 
-Player::Player(sf::Texture *Texture, sf::Vector2i Position) {
+Player::Player(sf::Texture *Texture, Coords Position): position(Position){
     texture = new sf::Texture;
     texture = Texture;
     sprite = new sf::Sprite(*texture);
@@ -37,31 +37,35 @@ int Player::getSpeed() {
 }
 
 int Player::getMove() {
+    step++;
     return side;
 }
 
-int Player::setSide(Side now_side) {
-    side = now_side;
+void Player::setSide(PAction now_side) {
+    side = (int)now_side - 1;
 }
 
 int Player::getStep() {
-    return 500;
+    return step;
 }
 
 void Player::setStep(int step, Type_of_elem typeOfEnemy) {
     if (typeOfEnemy == Type_of_elem::WIZARD){
         atc += step*2;
         hp += step;
+        max_hp += step;
         mp += step*7;
     }
     else if (typeOfEnemy == Type_of_elem::TANK){
         atc += step*3;
         hp += step*6;
+        max_hp += step*6;
         mp += step;
     }
     else {
         atc += step*5;
         hp += step*3;
+        max_hp += step*3;
         mp += step*2;
     }
 }
@@ -72,8 +76,33 @@ void Player::setItem(Type_of_item item) {
     }
     else if (item == Type_of_item::HP){
         hp += 1000;
+        max_hp += 1000;
     }
     else{
         mp += 300;
     }
+}
+
+Coords Player::getPosition() {
+    return position;
+}
+
+void Player::setPosition(Coords position) {
+    Player::position = position;
+}
+
+int Player::getMaxHp() const {
+    return max_hp;
+}
+
+void Player::setMaxHp(int maxHp) {
+    max_hp = maxHp;
+}
+
+int Player::getHp() {
+    return hp;
+}
+
+int Player::getIp() {
+    return ip;
 }

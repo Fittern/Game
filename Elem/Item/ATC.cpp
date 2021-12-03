@@ -4,7 +4,7 @@
 
 #include "ATC.h"
 
-ATC::ATC(sf::Texture *Texture, sf::Vector2i Position): position(Position) {
+ATC::ATC(sf::Texture *Texture, Coords Position): position(Position) {
     texture = new sf::Texture;
     texture = Texture;
     sprite = new sf::Sprite(*texture);

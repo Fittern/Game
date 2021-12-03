@@ -1,5 +1,4 @@
-#ifndef GAME_FLOORBUILDERTREE_H
-#define GAME_FLOORBUILDERTREE_H
+#pragma once
 
 #include "FloorBuilder.h"
 #include <cstdlib>
@@ -20,9 +19,12 @@ public:
     void GeneratEntryCell() override;
     void GeneratExitCell() override;
 
+    void GeneratItems() override;
+
+    void GeneratPlayer() override;
+
+    void GeneratEnemy() override;
+
     void Reset();
     Floor* getFloor();
 };
-
-
-#endif //GAME_FLOORBUILDERTREE_H

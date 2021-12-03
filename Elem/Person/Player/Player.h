@@ -1,46 +1,40 @@
-//
-// Created by denis on 23.10.2021.
-//
-
-#ifndef GAME_PLAYER_H
-#define GAME_PLAYER_H
+#pragma once
 
 #include "../IPerson.h"
-
-enum Side{
-    LEFT,
-    RIGHT,
-    UP,
-    DOWN
-};
 
 class Player: public IPerson{
 public:
     sf::Texture* texture;
     sf::Sprite* sprite;
-    sf::Vector2i position;
+    Coords position;
     //Type_of_elem type = Type_of_elem::ENEMY;
     int speed = 1;
     int atc = 300;
     int hp = 300;
+    int max_hp = 300;
     int mp = 300;
     int side;
+    int ip = 0;
+    int step = 0;
 
-    Player(sf::Texture* Texture, sf::Vector2i Position);
+    Player(sf::Texture* Texture, Coords Position);
     ~Player();
     sf::Sprite* getSprite() final;
     Type_of_elem getType() final;
 
-    int setSide(Side now_side);
+    void setSide(PAction now_side);
 
+    Coords getPosition() final;
+    void setPosition(Coords position) final;
     int getDamage() final;
     void setDamage(int damage) final;
     int getSpeed() final;
     int getMove() final;
+    int getIp() final;
+    int getHp() final;
     int getStep() final;
     void setStep(int step, Type_of_elem typeOfEnemy) final;
-    void setItem(Type_of_item item) override;
+    void setItem(Type_of_item item) final;
+    int getMaxHp() const;
+    void setMaxHp(int maxHp);
 };
-
-
-#endif //GAME_PLAYER_H

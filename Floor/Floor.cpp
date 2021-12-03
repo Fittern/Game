@@ -37,9 +37,9 @@ Floor::Floor(Floor &&other) {
     other.width = 0;
     cells = new Cell**[height];
     exit = other.exit;
-    other.exit = sf::Vector2i(0,0);
+    other.exit = Coords(0,0);
     entry = other.entry;
-    other.entry = sf::Vector2i(0,0);
+    other.entry = Coords(0,0);
     for (int i = 0; i < height; i++) cells[i] = new Cell*[width];
     for (int i = 0; i < height; ++i) for (int j = 0; j < width; ++j){
             cells[i][j] = new Cell(other.cells[i][j]->getTexture(), other.cells[i][j]->getPosition(), other.cells[i][j]->getElem(), other.cells[i][j]->getType());
@@ -54,9 +54,9 @@ Floor& Floor::operator=(Floor&& other){
     other.width = 0;
     cells = new Cell**[height];
     exit = other.exit;
-    other.exit = sf::Vector2i(0,0);
+    other.exit = Coords(0,0);
     entry = other.entry;
-    other.entry = sf::Vector2i(0,0);
+    other.entry = Coords(0,0);
     for (int i = 0; i < height; i++) cells[i] = new Cell*[width];
     for (int i = 0; i < height; ++i) for (int j = 0; j < width; ++j){
             cells[i][j] = new Cell(other.cells[i][j]->getTexture(), other.cells[i][j]->getPosition(), other.cells[i][j]->getElem(), other.cells[i][j]->getType());
@@ -70,6 +70,9 @@ void Floor::Draw_Floor(sf::RenderWindow* window) {
         for (int j = 0; j < width; ++j) {
             //cells[i][j]->setSprite(cells[i][j]->getTexture());
             window->draw(*this->cells[i][j]->getSprite());
+            if (this->cells[i][j]->getElem() != nullptr) {
+                window->draw(*this->cells[i][j]->getElem()->getSprite());
+            }
         }
     }
 };
@@ -82,7 +85,7 @@ Floor::~Floor() {
 void Floor::setAllCell(sf::Texture* texture) {
     for (int i = 0; i < height; ++i) {
         for (int j = 0; j < width; ++j) {
-            cells[i][j] = new Cell(texture, sf::Vector2i(i, j), nullptr, Type::NORMAL);
+            cells[i][j] = new Cell(texture, Coords(i, j), nullptr, Type::NORMAL);
         }
     }
 }
