@@ -26,7 +26,7 @@ int VecOfPerson::getQuantity() const {
 }
 
 void VecOfPerson::del(int ind) {
-    delete (Enemy*)persons[ind];
+    ((Enemy*)persons[ind])->setDead();
     for (int i = ind + 1; i < _quantity; ++i) {
         ((Enemy*)persons[i])->ip--;
         persons[i-1] = persons[i];

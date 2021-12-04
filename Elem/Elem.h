@@ -5,6 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include "../GameEng/Const.h"
 #include "Coords.h"
+#include "../Logger/Subject.h"
 
 enum class Type_of_elem{
     PLAYER,
@@ -20,7 +21,7 @@ enum class Type_of_item{
     HP
 };
 
-class Elem {
+class Elem: public Subject{
 /*private:
     Type_of_elem _type;
     int step, _hp, _chi, _damage;*/

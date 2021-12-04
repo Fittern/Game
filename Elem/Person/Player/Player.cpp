@@ -106,3 +106,8 @@ int Player::getHp() {
 int Player::getIp() {
     return ip;
 }
+
+std::string Player::GetLog() {
+    return "type: Player\nId:" + std::to_string(ip) +"\nnow health: " + std::to_string(hp) + "\nmax health: " + std::to_string(max_hp) + " \n" + "damage: " + std::to_string(atc) + " \n" + "coord: ("   + std::to_string(position.x) + ", " +
+           std::to_string(position.y) + ")" + " \n" + "//-----------\n";
+}

@@ -21,6 +21,7 @@ public:
     int hp;
     int mp;
     int ip;
+    int isLive = 1;
 
     Enemy(sf::Texture* Texture, Coords Position);
     ~Enemy();
@@ -38,6 +39,8 @@ public:
     int getMove() override;
     int getStep() final;
     void setStep(int step, Type_of_elem type) final;
+    std::string getIsLive();
+    void setDead();
 };
 
 

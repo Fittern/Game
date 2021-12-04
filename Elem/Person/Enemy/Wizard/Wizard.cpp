@@ -29,3 +29,8 @@ int Wizard::getMove() {
 Type_of_elem Wizard::getType() {
     return Type_of_elem::WIZARD;
 }
+
+std::string Wizard::GetLog() {
+    return "type: Wizard\nId:" + std::to_string(ip) + "\nLive: " + getIsLive() + "\nnow health: " + std::to_string(hp) + " \n" + "damage: " + std::to_string(atc) + " \n" + "coord: ("   + std::to_string(position.x) + ", " +
+        std::to_string(position.y) + ")" + " \n" + "//-----------\n";
+}

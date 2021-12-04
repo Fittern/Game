@@ -4,7 +4,7 @@
 
 #include "Actions.h"
 
-Actions::Actions(VecOfPerson &vec, Floor &floor) : _vec(vec), _floor(floor) {}
+Actions::Actions(VecOfPerson &vec, VecOfItem& vecItem, Floor &floor) : _vec(vec), _vecItem(vecItem) , _floor(floor) {}
 
 PAction Actions::move(PAction side) {
     ((Player*)(_vec.persons[0]))->setSide(side);
@@ -20,6 +20,7 @@ PAction Actions::move(PAction side) {
                 if (_floor.cells[new_pos.x][new_pos.y]->getElem()->getType() == Type_of_elem::ITEM){
                     IItem* item = (IItem*)(_floor.cells[new_pos.x][new_pos.y]->getElem());
                     _vec.persons[i]->setItem(item->getItem());
+                    _vecItem.del(item->getId());
                     movePerson(new_pos, i);
                 }
                 if(i == 0) {

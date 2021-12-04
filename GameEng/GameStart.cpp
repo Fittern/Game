@@ -2,7 +2,7 @@
 
 void GameStart::StartGame() {
     unsigned int a = time(0);
-    srand(static_cast<unsigned int>(a));//527, 55, 123, 77, 1638560379
+    srand(static_cast<unsigned int>(a));//527, 55, 123, 77, 1638560379, 1638567804
 
     MyTexture game_texture;
     //sf::RenderWindow window(sf::VideoMode(HEIGTH_OF_FLOOR * WIDTH, WIDTH_OF_FLOOR * WIDTH), "OOP: Lab 1");
@@ -12,6 +12,7 @@ void GameStart::StartGame() {
     director.Builder_FloorBuilderTree();
     Floor* floor = builder->getFloor();
     VecOfPerson per(*floor);
+    VecOfItem item(*floor);
     /*
     //Floor* floor1 = new Floor(HEIGTH_OF_FLOOR, WIDTH_OF_FLOOR);
     //*floor1 = *floor;
@@ -32,13 +33,34 @@ void GameStart::StartGame() {
         //window2.display();
     }*/
 
-    Actions actions(per, *floor);
+    int type;
+    LoggerImplication* base;
+    std::cin >> type;
+    switch(type) {
+        case 0: {
+            LoggerImplication *log = new ConcreteLog();
+            base = new FileLogger(log);
+        }
+        case 1: {
+            LoggerImplication *log = new ConcreteLog();
+            base = new ConsoleLogger(log);
+        }
+        default: {
+            LoggerImplication *log = new ConcreteLog();
+            LoggerImplication *log1 = new FileLogger(log);
+            base = new ConsoleLogger(log1);
+        }
+    }
+    Logger *logger = Logger::GetInstance(item.items[0], base);
+
+    Actions actions(per, item, *floor);
     Rendering rendering(*floor, game_texture, (Player*)per.persons[0]);
     rendering.drawFloor();
     //Floor* floor1 = new Floor(HEIGTH_OF_FLOOR, WIDTH_OF_FLOOR);
     //*floor1 = *floor;
     //floor->setAllCell(game_texture.getTextureOfCellWall());
     PAction pressed = NOTHING;
+
     while (pressed) {
         pressed = rendering.winda();
         if (pressed == LEFT) {
@@ -58,13 +80,14 @@ void GameStart::StartGame() {
             rendering.drawFloor();
         }
         if (pressed == WIN){
-            printf("You have completed the map №%d in %d steps!!!", a, per.persons[0]->getStep()-20);
+            printf("You have completed the map №%d in %d steps, with %d enemy!!!", a, per.persons[0]->getStep(), per.getQuantity());
             pressed = END;
         }
         if (pressed == DEAD){
             printf("You died on the mapd №%d", a);
             pressed = END;
         }
+        logger->Update();
     }
 
 

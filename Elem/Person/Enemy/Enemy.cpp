@@ -82,4 +82,16 @@ int Enemy::getIp() {
     return ip;
 }
 
+std::string Enemy::getIsLive() {
+    if (isLive == 1){
+        return "Live";
+    } else{
+        return "Dead";
+    }
+}
+
+void Enemy::setDead() {
+    isLive = 0;
+}
+
 

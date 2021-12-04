@@ -23,3 +23,8 @@ int Solder::getMove() {
 Type_of_elem Solder::getType() {
     return Type_of_elem::SOLDER;
 }
+
+std::string Solder::GetLog() {
+    return "type: Solder\nId:" + std::to_string(ip) + "\nLive: " + getIsLive() + "\nnow health: " + std::to_string(hp) + " \n" + "damage: " + std::to_string(atc) + " \n" + "coord: ("   + std::to_string(position.x) + ", " +
+           std::to_string(position.y) + ")" + " \n" + "//-----------\n";
+}

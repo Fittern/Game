@@ -12,7 +12,6 @@ public:
     VecOfPerson(const Floor &floor);
     int getQuantity() const;
     void del(int ind);
-    //TODO:: void kill();
 };
 
 

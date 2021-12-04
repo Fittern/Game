@@ -1,13 +1,15 @@
 #pragma once
 
 #include "../VecOfElem/VecOfPerson/VecOfPerson.h"
+#include "../VecOfElem/VecOfItem/VecOfItem.h"
 
 class Actions {
 private:
     VecOfPerson& _vec;
+    VecOfItem& _vecItem;
     Floor& _floor;
 public:
-    Actions(VecOfPerson &vec, Floor &floor);
+    Actions(VecOfPerson &vec, VecOfItem& vecItem, Floor &floor);
 
     PAction move(PAction side);
     void movePerson(Coords new_pos, int num_of_per);

@@ -22,3 +22,8 @@ int Tank::getMove() {
 Type_of_elem Tank::getType() {
     return Type_of_elem::TANK;
 }
+
+std::string Tank::GetLog() {
+    return "type: Tank\nId:" + std::to_string(ip) + "\nLive: " + getIsLive() +"\nnow health: " + std::to_string(hp) + " \n" + "damage: " + std::to_string(atc) + " \n" + "coord: ("   + std::to_string(position.x) + ", " +
+           std::to_string(position.y) + ")" + " \n" + "//-----------\n";
+}

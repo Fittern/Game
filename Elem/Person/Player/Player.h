@@ -37,4 +37,5 @@ public:
     void setItem(Type_of_item item) final;
     int getMaxHp() const;
     void setMaxHp(int maxHp);
+    std::string GetLog() final;
 };
