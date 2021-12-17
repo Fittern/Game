@@ -6,6 +6,7 @@ private:
     int _quantity = 0;
     const Floor &_floor;
 public:
+    int start_quantity;
     std::vector <IPerson*> persons;
 
 

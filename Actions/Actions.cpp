@@ -57,15 +57,12 @@ PAction Actions::move(PAction side) {
             }
             if (_floor.cells[new_pos.x][new_pos.y]->getType() == Type::EXIT){
                 if (i == 0) {
-                    if (_vec.getQuantity() == 1){
-                        return WIN;
-                    }else{
-                        if (((Player*)_vec.persons[i])->getMaxHp() - ((Player*)_vec.persons[i])->getHp() > 50){
-                            _vec.persons[i]->setDamage(-50);
-                        } else if (((Player*)_vec.persons[i])->getMaxHp() - ((Player*)_vec.persons[i])->getHp() > 0){
-                            _vec.persons[i]->setDamage(-(((Player*)_vec.persons[i])->getMaxHp() - ((Player*)_vec.persons[i])->getHp()));
-                        }
+                    if (((Player*)_vec.persons[i])->getMaxHp() - ((Player*)_vec.persons[i])->getHp() > 50){
+                        _vec.persons[i]->setDamage(-50);
+                    } else if (((Player*)_vec.persons[i])->getMaxHp() - ((Player*)_vec.persons[i])->getHp() > 0){
+                        _vec.persons[i]->setDamage(-(((Player*)_vec.persons[i])->getMaxHp() - ((Player*)_vec.persons[i])->getHp()));
                     }
+                    return WIN;
                 }
             }
             if (_floor.cells[new_pos.x][new_pos.y]->getType() == Type::ENTRY){

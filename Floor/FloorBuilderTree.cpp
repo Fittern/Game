@@ -132,13 +132,13 @@ void FloorBuilderTree::GeneratItems() {
                     floor->cells[i][j]->setElem(hp);
                     floor->cells[i][j]->setType(Type::FULL);
                 }
-                else if (floor->cells[i][j]->getRandom()%CHANCE_OF_ITEM == 6){
+                else if (floor->cells[i][j]->getRandom()%CHANCE_OF_ITEM == 9){
                     Coords pos(i,j);
                     auto mp = new MP(now_texture.getTextureOfElemMp(), pos);
                     floor->cells[i][j]->setElem(mp);
                     floor->cells[i][j]->setType(Type::FULL);
                 }
-                else if (floor->cells[i][j]->getRandom()%CHANCE_OF_ITEM == 9){
+                else if (floor->cells[i][j]->getRandom()%CHANCE_OF_ITEM == 6){
                     Coords pos(i,j);
                     auto atc = new ATC(now_texture.getTextureOfElemAtc(), pos);
                     floor->cells[i][j]->setElem(atc);

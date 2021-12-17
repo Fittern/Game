@@ -18,7 +18,8 @@ VecOfPerson::VecOfPerson(const Floor &floor) : _floor(floor) {
             }
         }
     }
-    std::cout << _quantity << std::endl;
+    start_quantity = _quantity - 1;
+    //std::cout << _quantity << std::endl;
 }
 
 int VecOfPerson::getQuantity() const {

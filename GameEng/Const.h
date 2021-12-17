@@ -7,5 +7,5 @@
 
 #define MIN_SIZE_OF_FLOOR 2
 
-#define CHANCE_OF_ITEM 150
+#define CHANCE_OF_ITEM 15
 #define CHANCE_OF_ENEMY 10

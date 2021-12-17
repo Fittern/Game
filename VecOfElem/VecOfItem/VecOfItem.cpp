@@ -16,7 +16,7 @@ VecOfItem::VecOfItem(const Floor &floor) : _floor(floor) {
             }
         }
     }
-    std::cout << _quantity << std::endl;
+    //std::cout << _quantity << std::endl;
 }
 
 int VecOfItem::getQuantity() const {
