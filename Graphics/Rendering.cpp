@@ -80,6 +80,14 @@ PAction Rendering::winda() {
                 {
                     return PAction::DOWN;
                 }
+                if (event.key.code == sf::Keyboard::Q) //указываешь кнопку
+                {
+                    return PAction::SAVE;
+                }
+                if (event.key.code == sf::Keyboard::E) //указываешь кнопку
+                {
+                    return PAction::WR;
+                }
             }
         }
         //_floor.Draw_Floor(_window);

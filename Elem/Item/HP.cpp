@@ -47,3 +47,19 @@ int HP::getId() const {
 void HP::setId(int id) {
     HP::id = id;
 }
+
+int HP::getIdSt() const {
+    return id_st;
+}
+
+void HP::setIdSt(int idSt) {
+    id_st = idSt;
+}
+
+ Coords &HP::getPosition()  {
+    return position;
+}
+
+void HP::setPosition(const Coords &position) {
+    HP::position = position;
+}

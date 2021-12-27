@@ -47,3 +47,19 @@ int MP::getId() const {
 void MP::setId(int id) {
     MP::id = id;
 }
+
+int MP::getIdSt() const {
+    return id_st;
+}
+
+void MP::setIdSt(int idSt) {
+    id_st = idSt;
+}
+
+ Coords &MP::getPosition()  {
+    return position;
+}
+
+void MP::setPosition(const Coords &position) {
+    MP::position = position;
+}

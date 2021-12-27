@@ -22,6 +22,7 @@ public:
     int mp;
     int ip;
     int isLive = 1;
+    int id_st;
 
     Enemy(sf::Texture* Texture, Coords Position);
     ~Enemy();
@@ -41,6 +42,8 @@ public:
     void setStep(int step, Type_of_elem type) final;
     std::string getIsLive();
     void setDead();
+    int getIdSt() const;
+    void setIdSt(int idSt);
 };
 
 

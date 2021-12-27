@@ -8,10 +8,11 @@ enum PAction{
     RIGHT,
     UP,
     DOWN,
-    ATTACK,
     NOTHING,
     WIN,
-    DEAD
+    DEAD,
+    SAVE,
+    WR
 };
 
 class IPerson: public Elem {

@@ -20,6 +20,7 @@
 
 #include "../Rules/RulesBuilder.h"
 #include "../Rules/RuleEnd.h"
+#include "../Serialization/Save.h"
 
 template<typename R1, typename R2>
 
@@ -27,12 +28,16 @@ class GameStart {
 private:
     R1 ruleBuilder;
     R2 ruleEnd;
-    int code_of_map;
-    Floor* floor;
+    int code_of_map, num_per;
+    Floor* floor, *floor_st;
 public:
     GameStart(){
         floor = ruleBuilder.GetFloorFromBuilder();
+        Floor help(WIDTH_OF_FLOOR, HEIGTH_OF_FLOOR);
+        floor_st = &help;
+        *floor_st = *floor;
         code_of_map = ruleBuilder.GetInt();
+        num_per = ruleEnd.Int();
     };
 
     void StartGame(){
@@ -76,6 +81,12 @@ public:
             if (pressed == DEAD){
                 printf("You died on the map №%d", code_of_map);
                 pressed = END;
+            }
+            if (pressed == SAVE){
+                Save::SaveG(floor, code_of_map, num_per, &item, &per);
+            }
+            if (pressed == WR){
+                Save::WriteG(floor, code_of_map, num_per, &item, &per);
             }
         }
     };

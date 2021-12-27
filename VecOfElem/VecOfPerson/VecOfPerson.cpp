@@ -11,6 +11,7 @@ VecOfPerson::VecOfPerson(const Floor &floor) : _floor(floor) {
                 if (_floor.cells[i][j]->getElem()->getType() != Type_of_elem::ITEM) {
                     if (_quantity > 0){
                         ((Enemy*)(_floor.cells[i][j]->getElem()))->ip = _quantity;
+                        ((Enemy*)(_floor.cells[i][j]->getElem()))->ip = _quantity;
                     }
                     _quantity++;
                     persons.push_back((IPerson*)(_floor.cells[i][j]->getElem()));

@@ -47,3 +47,19 @@ int ATC::getId() const {
 void ATC::setId(int id) {
     ATC::id = id;
 }
+
+int ATC::getIdSt() const {
+    return id_st;
+}
+
+void ATC::setIdSt(int idSt) {
+    id_st = idSt;
+}
+
+ Coords &ATC::getPosition() {
+    return position;
+}
+
+void ATC::setPosition(const Coords &position) {
+    ATC::position = position;
+}

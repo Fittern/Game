@@ -10,6 +10,7 @@ VecOfItem::VecOfItem(const Floor &floor) : _floor(floor) {
             if (_floor.cells[i][j]->getElem()) {
                 if (_floor.cells[i][j]->getElem()->getType() == Type_of_elem::ITEM) {
                     ((IItem*)(_floor.cells[i][j]->getElem()))->setId(_quantity);
+                    ((IItem*)(_floor.cells[i][j]->getElem()))->setIdSt(_quantity);
                     _quantity++;
                     items.push_back((IItem*)(_floor.cells[i][j]->getElem()));
                 }

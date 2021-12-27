@@ -18,4 +18,7 @@ public:
             return PAction::NOTHING;
         }
     }
+    int Int(){
+        return End_ID;
+    }
 };

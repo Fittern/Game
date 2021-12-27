@@ -94,4 +94,12 @@ void Enemy::setDead() {
     isLive = 0;
 }
 
+int Enemy::getIdSt() const {
+    return id_st;
+}
+
+void Enemy::setIdSt(int idSt) {
+    id_st = idSt;
+}
+
 
