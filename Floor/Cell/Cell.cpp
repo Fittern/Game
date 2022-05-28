@@ -1,6 +1,6 @@
 #include "Cell.h"
 
-Cell::Cell(sf::Texture* texture, sf::Vector2i position, Elem* elem, Type type): _position(position), _elem(elem), _type(type){
+Cell::Cell(sf::Texture* texture, Coords position, Elem* elem, Type type): _position(position), _elem(elem), _type(type){
     _texture = new sf::Texture;
     *(_texture) = *(texture);
     _sprite = new sf::Sprite(*texture);
@@ -81,14 +81,18 @@ std::ostream &operator<<(std::ostream &os, const Cell &cell) {
     return os;
 }
 
-/*Cell::Cell(sf::Sprite sprite, sf::Vector2i position, Elem *elem, Type type): _position(position), _elem(elem), _type(type){
+/*Cell::Cell(sf::Sprite sprite, Coords position, Elem *elem, Type type): _position(position), _elem(elem), _type(type){
     _sprite = &sprite;
 }*/
 
-const sf::Vector2i &Cell::getPosition() const {
+const Coords &Cell::getPosition() const {
     return _position;
 }
 
 sf::Texture* Cell::getTexture() const {
     return _texture;
+}
+
+int Cell::getRandom() const {
+    return random;
 }

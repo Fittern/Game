@@ -1,9 +1,11 @@
-#include "GameStart.h"
-#include <ctime>
+#include "GameEng/GameStart.h"
+#include "Rules/RulesBuilder.h"
+
 
 int main()
 {
-    srand(static_cast<unsigned int>(time(0)));//527, 55, 123
-    GameStart::StartGame();
+    //527, 55, 123, 77, 1638560379, 1638567804
+    GameStart<RulesBuilder<0>, RuleEnd<-1>> game;
+    game.StartGame();
     return 0;
 }

@@ -1,5 +1,4 @@
-#ifndef GAME_FLOORBUILDER_H
-#define GAME_FLOORBUILDER_H
+#pragma once
 
 #include "Floor.h"
 
@@ -9,7 +8,10 @@ public:
     virtual void GeneratWallCells() = 0;
     virtual void GeneratEntryCell() = 0;
     virtual void GeneratExitCell() = 0;
+
+    virtual void GeneratItems() = 0;
+    virtual void GeneratPlayer() = 0;
+    virtual void GeneratEnemy() = 0;
+
+    virtual Floor* getFloor() = 0;
 };
-
-
-#endif //GAME_FLOORBUILDER_H

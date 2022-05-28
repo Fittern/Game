@@ -12,8 +12,8 @@ FloorBuilderTree::~FloorBuilderTree(){
 void FloorBuilderTree::GeneratNormalCells(){
     for (int i = 0; i < this->floor->height; ++i) {
         for (int j = 0; j < this->floor->width; ++j) {
-            this->floor->cells[i][j] = new Cell(now_texture.getTextureOfCellNormal(), sf::Vector2i(i, j), nullptr, Type::NORMAL);
-        // TODO: nullptr в поле elem заменить на нормальное(пустое проходимое)
+            this->floor->cells[i][j] = new Cell(now_texture.getTextureOfCellNormal(), Coords(i, j), nullptr, Type::NORMAL);
+        // TODO:(Зачем?) nullptr в поле elem заменить на нормальное(пустое проходимое)
         }
     }
 };
@@ -23,7 +23,7 @@ void FloorBuilderTree::GeneratWallCells(){
         for (int j = 0; j < this->floor->width; ++j) {
             if (i == 0 || i == this->floor->height - 1 || j == 0 || j == this->floor->width - 1){
                 this->floor->cells[i][j]->setElem(nullptr);
-                // TODO: nullptr в поле elem заменить на не проходимое
+                // TODO:(Зачем?) nullptr в поле elem заменить на не проходимое
                 this->floor->cells[i][j]->setType(Type::WALL);
                 this->floor->cells[i][j]->setSprite(now_texture.getTextureOfCellWall());
             }
@@ -63,7 +63,7 @@ void FloorBuilderTree::GeneratWallDungeonCells(int x1, int y1, int x2, int y2, i
                 for (int i = y1 + 1; i < y2 ; ++i) {
                     if (i != (int) ((y1 + y2) / 2)) {
                         this->floor->cells[i][wall_index]->setElem(nullptr);
-                        // TODO: nullptr в поле elem заменить на не проходимое
+                        // TODO:(Зачем?) nullptr в поле elem заменить на не проходимое
                         this->floor->cells[i][wall_index]->setType(Type::WALL);
                         this->floor->cells[i][wall_index]->setSprite(now_texture.getTextureOfCellWall());
                     }
@@ -89,7 +89,7 @@ void FloorBuilderTree::GeneratWallDungeonCells(int x1, int y1, int x2, int y2, i
                 for (int i = x1 + 1; i < x2 ; ++i) {
                     if (i != (int) ((x1 + x2) / 2)) {
                         this->floor->cells[wall_index][i]->setElem(nullptr);
-                        // TODO: nullptr в поле elem заменить на не проходимое
+                        // TODO:(Зачем?) nullptr в поле elem заменить на не проходимое
                         this->floor->cells[wall_index][i]->setType(Type::WALL);
                         this->floor->cells[wall_index][i]->setSprite(now_texture.getTextureOfCellWall());
                     }
@@ -120,6 +120,67 @@ Floor* FloorBuilderTree::getFloor(){
     result = this->floor;
     this->Reset();
     return result;
+}
+
+void FloorBuilderTree::GeneratItems() {
+    for (int i = 1; i < this->floor->height - 1; ++i) {
+        for (int j = 1; j < this->floor->width - 1; ++j) {
+            if (floor->cells[i][j]->getType() == Type::NORMAL){
+                if (floor->cells[i][j]->getRandom()%CHANCE_OF_ITEM == 3){
+                    Coords pos(i,j);
+                    auto hp = new HP(now_texture.getTextureOfElemHp(), pos);
+                    floor->cells[i][j]->setElem(hp);
+                    floor->cells[i][j]->setType(Type::FULL);
+                }
+                else if (floor->cells[i][j]->getRandom()%CHANCE_OF_ITEM == 9){
+                    Coords pos(i,j);
+                    auto mp = new MP(now_texture.getTextureOfElemMp(), pos);
+                    floor->cells[i][j]->setElem(mp);
+                    floor->cells[i][j]->setType(Type::FULL);
+                }
+                else if (floor->cells[i][j]->getRandom()%CHANCE_OF_ITEM == 6){
+                    Coords pos(i,j);
+                    auto atc = new ATC(now_texture.getTextureOfElemAtc(), pos);
+                    floor->cells[i][j]->setElem(atc);
+                    floor->cells[i][j]->setType(Type::FULL);
+                }
+            }
+        }
+    }
+}
+
+void FloorBuilderTree::GeneratPlayer() {
+    Coords pos(1,1);
+    auto player = new Player(now_texture.getTextureOfElemPlayer(), pos);
+    floor->cells[1][1]->setElem(player);
+}
+
+void FloorBuilderTree::GeneratEnemy() {
+    for (int i = 1; i < this->floor->height - 1; ++i) {
+        for (int j = 1; j < this->floor->width - 1; ++j) {
+            if (floor->cells[i][j]->getType() == Type::NORMAL){
+                if (floor->cells[i][j]->getRandom()%(CHANCE_OF_ENEMY + (floor->height + floor->width - i - j )^2) == 0){
+                    Coords pos(i,j);
+                    auto tank = new Tank(now_texture.getTextureOfElemTank(), pos);
+                    floor->cells[i][j]->setElem(tank);
+                    floor->cells[i][j]->setType(Type::FULL);
+                }
+                else if (floor->cells[i][j]->getRandom()%(CHANCE_OF_ENEMY + (floor->height + floor->width - i - j )^2) == 1){
+                    Coords pos(i,j);
+                    auto solder = new Solder(now_texture.getTextureOfElemSolder(), pos);
+                    floor->cells[i][j]->setElem(solder);
+                    floor->cells[i][j]->setType(Type::FULL);
+                }
+                else if (floor->cells[i][j]->getRandom()%(CHANCE_OF_ENEMY + (floor->height + floor->width - i - j )^2) == 2){
+                    Coords pos(i,j);
+                    auto wizard = new Wizard(now_texture.getTextureOfElemWizard(), pos);
+                    floor->cells[i][j]->setElem(wizard);
+                    floor->cells[i][j]->setType(Type::FULL);
+                }
+            }
+        }
+    }
+
 }
 
 /*void FloorBuilderTree::setNowTexture() {

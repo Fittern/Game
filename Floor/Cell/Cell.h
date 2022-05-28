@@ -1,12 +1,10 @@
-#ifndef GAME_CELL_H
-#define GAME_CELL_H
-#define WIDTH 32
+#pragma once
 
 #include "iostream"
 #include "stdlib.h"
 #include <SFML/Graphics.hpp>
-#include "Elem/Elem.h"
-#include "Elem/MyTexture/MyTexture.h"
+#include "../../Elem/AllElem.h"
+#include "../../Graphics/MyTexture/MyTexture.h"
 
 
 enum class Type : unsigned short {
@@ -14,20 +12,22 @@ enum class Type : unsigned short {
     WALL,
     ENTRY,
     EXIT,
+    FULL,
     PLACE_OF_POWER
 };
 
 class Cell {
 private:
     Elem* _elem = nullptr;
+    int random = rand();
     Type _type;
-    sf::Vector2i _position;
+    Coords _position;
     sf::Sprite* _sprite;
     sf::Texture* _texture;
 
 public:
-    Cell(sf::Texture* texture, sf::Vector2i position, Elem* elem , Type type);
-    //Cell(sf::Sprite sprite, sf::Vector2i position, Elem* elem , Type type);
+    Cell(sf::Texture* texture, Coords position, Elem* elem , Type type);
+    //Cell(sf::Sprite sprite, Coords position, Elem* elem , Type type);
     Cell(const Cell&) = default;
     Cell(Cell&&) = default;
     Cell& operator=(const Cell& other);
@@ -36,7 +36,7 @@ public:
 
     sf::Texture* getTexture() const;
 
-    const sf::Vector2i &getPosition() const;
+    const Coords &getPosition() const;
     void setSprite(sf::Texture* texture);
     sf::Sprite* getSprite();
     void setElem(Elem* elem);
@@ -44,8 +44,7 @@ public:
     void setType(Type type);
     Type getType();
 
+    int getRandom() const;
+
     friend std::ostream &operator<<(std::ostream &os, const Cell &cell);
 };
-
-
-#endif //GAME_CELL_H
